@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    
+    <style>
+        body{
+            
+            font-size:3em; 
+        }
+        td{
+            width:10%;
+            text-align:center;
+            background-color:lightgrey;
+        }
+        #container{
+            width:30%;
+            border: medium solid #000000;
+
+        }
+        input{
+            width:80%;
+            margin-left:8%;
+            font-size:.5em; 
+        }
+      </style>
+    
+    <script>
+    var start = 'number1' ; 
+    var operation;    
+    var number1="";
+    var number2="";
+    var result;
+    function get(number){
+       if(number == 'plus'){
+            start ='number2';
+            operation = 'plus';
+           
+       }
+       if(number == 'minus'){
+            start ='number2';
+            operation = 'minus';
+       } 
+       if(number == 'equal'){
+           calcResult(number1,number2,operation);
+       }  
+       if(number == 'clear'){
+             clearAll();
+             return;
+            
+       }
+       var cell =document.getElementById(number);
+       cell.style.backgroundColor='lightcoral';
+       setTimeout(function(){
+            cell.style.backgroundColor='lightgrey'; 
+            }, 300);
+        if(start == 'number1' && (number != 'plus' && number != 'equal' && number != 'minus' && number != 'null')){
+            number1=number1 + number;
+            document.getElementById('num1').value= number1;
+        }
+        else if(start == 'number2' && (number != 'plus' && number != 'equal' && number != 'minus' && number != 'null')){
+            number2 = number2 + number;
+            document.getElementById('num2').value= number2;
+        } 
+    }
+        
+        function calcResult(number1,number2,operation){
+            if(operation == 'plus'){
+                  result = parseFloat(number1)+parseFloat(number2);  
+            }
+            else{
+                result = parseFloat(number1)-parseFloat(number2);  
+            }
+          
+            document.getElementById('result').value=result;
+            start = 'number1' ;   
+            number1="";
+            number2="";
+        }
+        function clearAll(){
+             document.getElementById('num1').value= "";
+             document.getElementById('num2').value= "";
+             document.getElementById('result').value= "";
+             number1="";
+             number2="";
+             start = 'number1';   
+            
+        }
+    
+    </script>
+<head>
+    <title></title>
+</head>
+<body>
+    <div id='container'>
+<input type=text id='num1'>
+<input type=text id='num2'>
+<input type=text id='result'>
+
+<table>
+    <tr><td id='1' onClick="get(1)">1</td><td  id='2' onClick="get(2)">2</td><td  id='3' onClick="get(3)">3</td></tr>
+     <tr><td id='4' onClick="get(4)">4</td><td id='5' onClick="get(5)">5</td><td id='6' onClick="get(6)">6</td></tr>
+     <tr><td id='7' onClick="get(7)">7</td><td id='8' onClick="get(8)">8</td><td id='9' onClick="get(9)">9</td></tr>
+    <tr><td id='0' onClick="get('0')">0</td><td id='.' onClick="get('.')">.</td ><td id='null' onClick="get('null')"> </td></tr>
+    
+     <tr><td id='plus' onClick="get('plus')">+</td><td id='minus' onClick="get('minus')">-</td ><td id='equal' onClick="get('equal')">=</td></tr>
+    <tr><td id='clear' onClick="get('clear')"colspan='3'>Clear</td></tr>
+</table>
+    
+    
+    
+    
+</div>   
+</body>
+</html>
